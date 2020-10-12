@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+  nginx_main: 
+    image: nginx
+    container_name: nginx_main
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx:/etc/nginx
+    networks:
+      IdentityServerDemo_Network:
+        ipv4_address: 172.16.1.100
+  identity_server:
+    container_name: IdentityServer
+    build:
+      context: ./IdentityServerDemo
+      dockerfile: Dockerfile
+    networks:
+      IdentityServerDemo_Network:
+        ipv4_address: 172.16.1.3
+        aliases:
+          - identityserver.local
+  demowebapi:
+    container_name: DemoWebApi
+    build:
+      context: ./DemoWebApi
+      dockerfile: Dockerfile
+    networks:
+      IdentityServerDemo_Network:
+        ipv4_address: 172.16.1.4
+        aliases:
+          - demowebapi.local
+networks:
+  IdentityServerDemo_Network:
+    external: yes
