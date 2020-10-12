@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CQlht9hvQog1s+rvkk4S3+ba68za9XvXYOG7EHIDAGyUYXbJ8A8TTjErJa3WVgCvaK9qQf6nos0eMfA2vhUefg==",
+  "dgSpecHash": "y7gyMvmhq3lgxFJMjltTK828766mt+SIvRmmvTJQvYkgMF7aePYZfDzfEGPqg/lugoG18DIW7PGOtx0JacjFeg==",
   "success": true,
   "projectFilePath": "C:\\Users\\marti\\Desktop\\IdentityServer4\\src\\IdentityServerDemo\\IdentityServerDemo.csproj",
   "expectedPackageFiles": [
@@ -47,6 +47,7 @@
     "C:\\Users\\marti\\.nuget\\packages\\microsoft.identitymodel.tokens\\5.6.0\\microsoft.identitymodel.tokens.5.6.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\marti\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512",
     "C:\\Users\\marti\\.nuget\\packages\\mysqlconnector\\0.69.9\\mysqlconnector.0.69.9.nupkg.sha512",
     "C:\\Users\\marti\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
     "C:\\Users\\marti\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\3.2.1\\pomelo.entityframeworkcore.mysql.3.2.1.nupkg.sha512",

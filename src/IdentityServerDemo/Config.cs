@@ -16,11 +16,21 @@ namespace IdentityServerDemo
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
-            new ApiScope[]
-            { };
+            new List<ApiScope> { 
+                new ApiScope("WebApi1","FirstIdentityWebApi")
+            };
 
         public static IEnumerable<Client> Clients =>
-            new Client[] 
-            { };
+            new List<Client>
+            {
+                new Client{ 
+                    ClientId = "DemoWebApi",
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    ClientSecrets={
+                      new Secret("PasswordToDemoWebApi".Sha256())
+                    },
+                    AllowedScopes = { "WebApi1" }
+                }
+            };
     }
 }

@@ -2,6 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -9,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 using System.Reflection;
 
 namespace IdentityServerDemo
@@ -28,7 +31,7 @@ namespace IdentityServerDemo
         {
             string ConnectionString = Configuration.GetConnectionString("IdentityServer4");
 
-            var build = services.AddIdentityServer(options => { options.IssuerUri = "http://identity.localdomain"; })
+            var build = services.AddIdentityServer(options => { options.IssuerUri = "http://identityserver.local"; })
             .AddConfigurationStore(options =>
    {
        options.ConfigureDbContext = b => b.UseMySql(ConnectionString, x => x.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
@@ -67,8 +70,45 @@ namespace IdentityServerDemo
             build.AddDeveloperSigningCredential();
         }
 
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+
+                var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                if (!context.Clients.Any())
+                {
+                    foreach (var client in Config.Clients)
+                    {
+                        context.Clients.Add(client.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.IdentityResources.Any())
+                {
+                    foreach (var resource in Config.IdentityResources)
+                    {
+                        context.IdentityResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiScopes.Any())
+                {
+                    foreach (var resource in Config.ApiScopes)
+                    {
+                        context.ApiScopes.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+            }
+        }
+
         public void Configure(IApplicationBuilder app)
         {
+
+
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
